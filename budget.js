@@ -51,9 +51,12 @@ window.location="./home.html"
 }
 
 
-//function add
 
-let bal = {
+  
+
+  //----------------------------
+  // add income and expense
+  let bal = {
     balance: 0,
     spend: 0
   };
@@ -63,23 +66,14 @@ let bal = {
     let amount = Math.floor(parseFloat(document.getElementById('amount').value));
   
     if (type === '' || isNaN(amount) || amount <= 0) {
-      alert('Enter valid data');
+        alert('Enter valid Data')
     } else {
-        alert('amount added sucessfully')
+      alert('amount added sucessfully')
       bal.balance += amount;
-      localStorage.setItem('balData', JSON.stringify(bal));
-      b.innerHTML=`${bal.balance}`
-
-      itable.innerHTML=`<tr>
-<td>${type}</td>
-<td>${amount}</td>
-<td>${bal.balance}</td>
-</tr>`
-
+      updateLocalStorageAndUI();
+      updateUI(type, amount, 'income');
     }
   }
-
-  //expense
   
   function addexpense() {
     let type1 = document.getElementById('type1').value;
@@ -89,42 +83,65 @@ let bal = {
       alert('Enter valid data');
     } else {
       if (amount1 <= bal.balance) {
+        alert('amount reduced sucessfully')
         bal.spend += amount1;
         bal.balance -= amount1;
-        localStorage.setItem('balData', JSON.stringify(bal));
-        alert('amount is reduced from your balance sucessfully')
-        s.innerHTML=`${bal.balance}`
-etable.innerHTML=`<tr>
-<td>${type1}</td>
-<td>${amount1}</td>
-<td>${bal.balance}</td>
-</tr>`
-
+        updateLocalStorageAndUI();
+        updateUI(type1, amount1, 'expense');
       } else {
-        alert('Insufficient balance');
+        alert(`insufficient balance`)
       }
     }
   }
-
   
+  function updateLocalStorageAndUI() {
+    localStorage.setItem('budgetData', JSON.stringify(bal));
+  }
+  
+  function updateUI(type, amount, transactionType) {
+    if (transactionType === 'income') {
+      b.innerHTML = `$${bal.balance}`;
+      itable.innerHTML += `<tr>
+        <td>${type}</td>
+        <td><span class="text-success">+${amount}</span></td>
+        <td>${bal.balance}</td>
+      </tr>`;
+    } else if (transactionType === 'expense') {
+      s.innerHTML = `$${bal.spend}`;
+      b.innerHTML = `$${bal.balance}`;
+      etable.innerHTML += `<tr>
+        <td>${type}</td>
+        <td><span class="text-danger">-${amount}</span></td>
+        <td>${bal.balance}</td>
+      </tr>`;
+    }
+  }
   window.onload = function () {
-    const storedData = localStorage.getItem('balData');
+    const storedData = localStorage.getItem('budgetData');
     if (storedData) {
       bal = JSON.parse(storedData);
-
-
+      b.innerHTML = `$${bal.balance}`;
+      s.innerHTML = `$${bal.spend}`;
+     
     }
   };
+  
+//clear
+function clearall(){
+  localStorage.removeItem(bal)
+  
+}
 
-  //clear
-  function clearall(){
-    localStorage.removeItem(bal)
-    
-  }
+
+//log out
+
+function logout(){
+  window.location="./login.html"
+}
 
 
-  //log out
 
-  function logout(){
-    window.location="./login.html"
-  }
+
+
+//-----------------------------------
+
