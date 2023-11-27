@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <title>Document</title>
+</head>
+
+<body style="background-color:#28282B ;">
+  <!-- NAVBAR -->
+
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+      <h2 class="text-light" style="margin-bottom: 50px;"> C A L C O N I C <span class="text-warning">_</span> </h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div>
+        <div class="navbar-nav p-2 mb-5">
+          <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+          <a class="nav-link active text-light" href="#">About</a>
+          <a class="nav-link active text-light" href="#">More</a>
+          <button type="button" class="btn btn-danger" onclick="logout()">Log out</button>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+  <!-- home page -->
+
+  <div class="container-xl border border-light m-5" style="border-radius: 10px;">
+    <div class="text-center text-light">
+      <h2 class="p-3">BUDGET CALCULATOR</h2>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="text-light border border-light p-5 m-4 ">
+          <h3 class="text-center">INCOME</h3>
+          <div class="form-floating m-4">
+            <input type="username" class="form-control" id="c_type" placeholder="income type">
+            <label for="floatingPassword">enter income type</label>
+          </div>
+
+          <div class="form-floating m-4">
+            <input type="number" class="form-control" id="amount" placeholder="Password">
+            <label for="floatingPassword">enter your amount</label>
+          </div>
+          <div class="m-4 text-center">
+            <button type="button" class="btn btn-outline-warning" onclick="add()">Add</button>
+
+          </div>
+        </div>
+      </div>
+      <!-- expense -->
+      <div class="col-6">
+        <div class="text-light border border-light p-5 m-4 ">
+          <h3 class="text-center">EXPENSE</h3>
+          <div class="form-floating m-4">
+            <input type="username" class="form-control" id="type1" placeholder="expense type">
+            <label for="floatingPassword">enter expense type</label>
+          </div>
+
+          <div class="form-floating m-4">
+            <input type="number" class="form-control" id="amount1" placeholder="password">
+            <label for="floatingPassword">enter your amount</label>
+          </div>
+          <div class="m-4 text-center">
+            <button type="button" class="btn btn-outline-warning" onclick="addexpense()">add</button>
+
+          </div>
+        </div>
+      </div>
+<div class="text-center">
+  <button class=" btn btn-warning text-light  rounded m-2" onclick="clearall()" id="clear">Clear<i class="fa-solid fa-broom"></i></button>
+
+</div>
+    </div>
+
+    <!-- curve box -->
+    <div class="row ">
+      <div style="display: flex; margin-left: 300px;">
+        
+        <div class="p-2 rounded-5 rounded-end-0" style="background-color: rgb(25, 26, 27); height: 180px; width: 250px;">
+                <h2 class="text-center text-light">Balance</h2>
+                <h3 class="text-center text-light p-4" id="b"></h3>
+    
+        </div>   
+        <div style="background-color:  rgb(238, 240, 230); height: 180px; width: 250px;" class="p-2 rounded-5 rounded-start-0">
+             <h2 class="text-center text-dark">Spend</h2>
+            <h3 class="text-center p-4 text-dark" id="s"></h3>
+        </div>
+      </div >
+      <hr class="text-light mt-3">
+
+    </div>
+
+
+    <!-- income and expense table -->
+    <div class="row">
+      <h2 class="text-center text-light">Income And Expense Details</h2>
+
+      <div class="col-6 text-light">
+
+        <h3 class=" m-5">Income</h3>
+        <table class="table-bordered border-light p-5 m-5 w-75" id="incometable">
+          <thead id="itable">
+            <tr>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Balance</th>
+
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="col-6 text-light">
+        <h3 class="text-light m-5">Expense</h3>
+        <table class="table-bordered border-light p-5 m-5 w-75" id="expensetable">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Balance</th>
+
+            </tr>
+
+          </thead>
+          <tbody id="etable">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+</body>
+<script src="./budget.js"></script>
+</html>
